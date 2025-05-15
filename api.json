@@ -1,0 +1,4 @@
+{
+  "ProductsApiUrl": "http://products-api",
+  "StockApiUrl": "http://stock-api"
+}

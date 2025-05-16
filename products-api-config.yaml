@@ -4,7 +4,7 @@ metadata:
   name: products-api-config
 data:
   application.properties: |
-    spring.datasource.url=jdbc:postgresql://products-db:5432/products
+    spring.datasource.url=jdbc:postgresql://products-db-0.products-db.default.svc.cluster.local:5432/products
     spring.datasource.username=postgres
     spring.datasource.password=SuperSecret123
     spring.jpa.hibernate.ddl-auto=update

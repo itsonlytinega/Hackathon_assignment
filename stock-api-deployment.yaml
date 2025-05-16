@@ -18,5 +18,11 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: POSTGRES_CONNECTION
-              value: "postgres://postgres:SuperSecret123@products-db:5432/products"
+            - name: POSTGRES_CONNECTION_STRING
+              value: "postgres://postgres:SuperSecret123@products-db-1.products-db.default.svc.cluster.local:5432/products"
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /cache
+      volumes:
+        - name: cache-volume
+          emptyDir: {}

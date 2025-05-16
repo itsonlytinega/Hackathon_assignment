@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+spec:
+  serviceName: "products-db"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: products-db
+  template:
+    metadata:
+      labels:
+        app: products-db
+    spec:
+      containers:
+      - name: postgres
+        image: widgetario/products-db:postgres-replicated
+        env:
+        - name: POSTGRES_PASSWORD
+          value: SuperSecret123
+        - name: REPLICATION_PASSWORD
+          value: SuperSecret123
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi

@@ -4,13 +4,13 @@
 
 This project demonstrates the deployment of a multi-component application called *Widgetario* on Kubernetes. It covers essential Kubernetes concepts such as Deployments, Services, ConfigMaps, Secrets, Ephemeral and Persistent Storage using `emptyDir` and StatefulSets.
 
-This submission includes *Parts 1 to 3* of the lab work.
+This submission includes *Parts 1 to 3* of the lab work.         
 
 ---
 
 ## 🗂️ Repository Structure
 
-All YAML files for Parts 1 to 3 are placed at the root level and named clearly to indicate their role:
+All YAML files for Parts 1 to 3 are placed at the root level and named clearly to indicate their role:        
 
 | File                           | Purpose                                      |
 |--------------------------------|----------------------------------------------|
@@ -32,12 +32,12 @@ All YAML files for Parts 1 to 3 are placed at the root level and named clearly t
 
 ## 🎯 Project Objectives
 
-- Deploy multi-service apps using Kubernetes
-- Use Services for inter-component communication
-- Apply ConfigMaps and Secrets for secure configuration
-- Implement `emptyDir` (ephemeral) and PVC-based storage for persistence
+- Deploy multi-service apps using Kubernetes              
+- Use Services for inter-component communication                             
+- Apply ConfigMaps and Secrets for secure configuration                             
+- Implement `emptyDir` (ephemeral) and PVC-based storage for persistence              
 - Replace stateless DB deployments with StatefulSets
-
+                
 ---
 
 ## 🔧 Setup Instructions
@@ -50,7 +50,7 @@ All YAML files for Parts 1 to 3 are placed at the root level and named clearly t
 
 ---
 
-### 🚀 Run the Project
+### 🚀 Run the Project                
 
 1. *Clone the repository*:
 

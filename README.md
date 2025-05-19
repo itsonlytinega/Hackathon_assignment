@@ -4,13 +4,13 @@
 
 This project demonstrates the deployment of a multi-component application called *Widgetario* on Kubernetes. It covers essential Kubernetes concepts such as Deployments, Services, ConfigMaps, Secrets, Ephemeral and Persistent Storage using `emptyDir` and StatefulSets.
 
-This submission includes *Parts 1 to 3* of the lab work.         
+This submission includes **Parts 1 to 5** of the lab work.
 
 ---
 
 ## 🗂️ Repository Structure
 
-All YAML files for Parts 1 to 3 are placed at the root level and named clearly to indicate their role:        
+All YAML files are placed at the root level and named clearly to indicate their role:
 
 | File                           | Purpose                                      |
 |--------------------------------|----------------------------------------------|
@@ -26,6 +26,7 @@ All YAML files for Parts 1 to 3 are placed at the root level and named clearly t
 | `postgres-statefulset.yaml`    | Alternative or main PostgreSQL StatefulSet   |
 | `postgres-pvc.yaml`            | PersistentVolumeClaim for DB storage         |
 | `products-api-config.yaml`     | ConfigMap for the products API               |
+| `products-api-secret.yaml`     | Secret for DB credentials                    |
 | `api.json`                     | Sample API data (if needed)                  |
 
 ---
@@ -37,7 +38,8 @@ All YAML files for Parts 1 to 3 are placed at the root level and named clearly t
 - Apply ConfigMaps and Secrets for secure configuration                             
 - Implement `emptyDir` (ephemeral) and PVC-based storage for persistence              
 - Replace stateless DB deployments with StatefulSets
-                
+- Build resilience using replicas and readiness/liveness probes
+
 ---
 
 ## 🔧 Setup Instructions
@@ -50,10 +52,10 @@ All YAML files for Parts 1 to 3 are placed at the root level and named clearly t
 
 ---
 
-### 🚀 Run the Project                
+### 🚀 Run the Project
 
-1. *Clone the repository*:
+1. **Clone the repository**:
 
    ```bash
    git clone https://github.com/itsonlytinega/Hackathon_assignment.git
-   cd widgetario-k8s
+   cd Hackathon_assignment

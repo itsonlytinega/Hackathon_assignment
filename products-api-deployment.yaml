@@ -12,6 +12,8 @@ spec:
       labels:
         app: products-api
     spec:
+      securityContext:
+        fsGroup: 2000            # Move fsGroup here to pod spec securityContext
       containers:
         - name: products-api
           image: widgetario/products-api:21.03
@@ -21,7 +23,38 @@ spec:
             - name: config-volume
               mountPath: /app/config/application.properties
               subPath: application.properties
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 3000
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
       volumes:
         - name: config-volume
           configMap:
             name: products-api-config
+

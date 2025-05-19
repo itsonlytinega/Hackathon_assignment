@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+  labels:
+    app: products-db
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products-db
+  template:
+    metadata:
+      labels:
+        app: products-db
+    spec:
+      securityContext:
+        fsGroup: 999
+      containers:
+      - name: postgres
+        image: widgetario/products-db:postgres-replicated
+        ports:
+        - containerPort: 5432
+        readinessProbe:
+          exec:
+            command:
+              - pg_isready
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+              - pg_isready
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+              - ALL
+

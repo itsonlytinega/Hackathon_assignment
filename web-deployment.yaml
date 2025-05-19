@@ -12,6 +12,8 @@ spec:
       labels:
         app: web
     spec:
+      securityContext:
+        fsGroup: 2000
       containers:
         - name: web
           image: widgetario/web:21.03
@@ -24,7 +26,39 @@ spec:
             - name: secrets-volume
               mountPath: /app/secrets/api.json
               subPath: api.json
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 3000
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
       volumes:
         - name: secrets-volume
           configMap:
             name: web-secrets
+
